@@ -82,27 +82,50 @@ char *termname = "st-256color";
  */
 unsigned int tabspaces = 8;
 
+/* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 
-  [0] = "#2e3436", /* black   */
-  [1] = "#cc0000", /* red     */
-  [2] = "#4e9a06", /* green   */
-  [3] = "#edd400", /* yellow  */
-  [4] = "#3465a4", /* blue    */
-  [5] = "#92659a", /* magenta */
-  [6] = "#06afb1", /* cyan    */
-  [7] = "#d3d7cf", /* white   */
+  /* 8 normal colors */
+  [0] = "#2d2d2d", /* black   */
+  [1] = "#f2777a", /* red     */
+  [2] = "#99cc99", /* green   */
+  [3] = "#ffcc66", /* yellow  */
+  [4] = "#6699cc", /* blue    */
+  [5] = "#cc99cc", /* magenta */
+  [6] = "#66cccc", /* cyan    */
+  [7] = "#d3d0c8", /* white   */
 
   /* 8 bright colors */
-  [8]  = "#6e706b", /* black   */
-  [9]  = "#ef2929", /* red     */
-  [10] = "#8ae234", /* green   */
-  [11] = "#fce94f", /* yellow  */
-  [12] = "#729fcf", /* blue    */
-  [13] = "#c19fbe", /* magenta */
-  [14] = "#63e9e9", /* cyan    */
-  [15] = "#eeeeec", /* white   */
+  [8]  = "#747369", /* black   */
+  [9]  = "#f2777a", /* red     */
+  [10] = "#99cc99", /* green   */
+  [11] = "#ffcc66", /* yellow  */
+  [12] = "#6699cc", /* blue    */
+  [13] = "#cc99cc", /* magenta */
+  [14] = "#66cccc", /* cyan    */
+  [15] = "#f2f0ec", /* white   */
+
+  /* special colors */
+  [256] = "#2d2d2d", /* background */
+  [257] = "#d3d0c8", /* foreground */
 };
+
+/*
+ * Default colors (colorname index)
+ * foreground, background, cursor
+ */
+unsigned int defaultfg = 257;
+unsigned int defaultbg = 256;
+static unsigned int defaultcs = 257;
+static unsigned int defaultrcs = 4;
+
+/*
+ * Colors used, when the specific fg == defaultfg. So in reverse mode this
+ * will reverse too. Another logic would only make the simple feature too
+ * complex.
+ */
+static unsigned int defaultitalic = 7;
+static unsigned int defaultunderline = 7;
 
 
 /*
@@ -110,10 +133,10 @@ static const char *colorname[] = {
  * foreground, background, cursor, reverse cursor
  */
 
-unsigned int defaultfg = 7;
-unsigned int defaultbg = 0;
-static unsigned int defaultcs = 15;
-static unsigned int defaultrcs = 4;
+/* unsigned int defaultfg = 7; */
+/* unsigned int defaultbg = 0; */
+/* static unsigned int defaultcs = 15; */
+/* static unsigned int defaultrcs = 4; */
 
 /*
  * Default shape of cursor
